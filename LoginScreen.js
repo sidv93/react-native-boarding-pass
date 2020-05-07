@@ -4,9 +4,9 @@ import passwordIcon from './assets/password.png';
 import emailIcon from './assets/email.png';
 import Logo from './assets/logo.png';
 
-const LoginButton = ({onLogin}) => {
+const LoginButton = ({navigation}) => {
     return (
-        <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
+        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Boarding pass', {source: 'Chennai', destination: 'Bangalore'})}>
             <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
     )
@@ -50,14 +50,14 @@ const PasswordContainer = () => {
     )
 }
 
-const LoginScreen = ({onLogin}) => {
+const LoginScreen = ({navigation}) => {
     return (
         <View style={styles.loginContainer}>
             <Image style={styles.logo} source={Logo} />
             <EmailContainer />
             <PasswordContainer />
             <Text style={styles.forgotPassword} onPress={() => alert('Forgot password')}>Forgot Password?</Text>
-            <LoginButton onLogin={onLogin} />
+            <LoginButton navigation={navigation} />
             <Text style={styles.signupLink}>Not a member?
                 <Text style={styles.joinNow} onPress={() => alert('Sign up!')}>Join now</Text>
             </Text>
@@ -69,7 +69,9 @@ const styles = StyleSheet.create({
     loginContainer: {
         alignSelf: 'stretch',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#425C5A',
+        flex: 1
     },
     loginButton: {
         backgroundColor: '#FFCEA1',

@@ -5,19 +5,22 @@ import Flight from './assets/flight.png';
 import ProfilePictue from './assets/profilepicture.png';
 import FlightInfoCard from './FlightInfoCard';
 
-const BoardingPass = ({ onBack }) => {
+const BoardingPass = ({ navigation, route }) => {
+    const { source, destination } = route.params;
     return (
         <ScrollView style={styles.boardingPassContainer}>
             <View style={styles.backAndProfileContainer}>
-                <TouchableOpacity onPress={onBack}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={BackButton} style={styles.backButton} />
                 </TouchableOpacity>
-                <Image source={ProfilePictue} style={styles.profilePicture} />
+                <TouchableOpacity onPress={() => navigation.setOptions({title: 'Siddharth'})}>
+                    <Image source={ProfilePictue} style={styles.profilePicture} />
+                </TouchableOpacity>
             </View>
             <View style={styles.flightPlacesContainer}>
                 <View style={styles.startingPlaceContainer}>
                     <Text style={styles.placeShort}>CHN</Text>
-                    <Text style={styles.placeExpanded}>Chennai</Text>
+                    <Text style={styles.placeExpanded}>{source}</Text>
                 </View>
                 <View style={styles.flightDurationContainer}>
                     <Image source={Flight} style={styles.flightIcon} />
@@ -25,7 +28,7 @@ const BoardingPass = ({ onBack }) => {
                 </View>
                 <View style={styles.destinationContainer}>
                     <Text style={styles.placeShort}>BLR</Text>
-                    <Text style={styles.placeExpanded}>Bangalore</Text>
+                    <Text style={styles.placeExpanded}>{destination}</Text>
                 </View>
             </View>
             <FlightInfoCard />
@@ -36,7 +39,8 @@ const BoardingPass = ({ onBack }) => {
 const styles = StyleSheet.create({
     boardingPassContainer: {
         alignSelf: 'stretch',
-        marginVertical: 10
+        flex: 1,
+        backgroundColor: '#425C5A',
     },
     backAndProfileContainer: {
         flexDirection: 'row',
